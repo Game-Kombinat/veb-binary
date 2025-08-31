@@ -28,7 +28,7 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an unnamed NbtByte tag, containing an empty array of bytes. </summary>
         public NbtByteArray()
-            : this((string?)null) { }
+            : this((string)null) { }
 
 
         /// <summary> Creates an unnamed NbtByte tag, containing the given array of bytes. </summary>
@@ -42,7 +42,7 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an NbtByte tag with the given name, containing an empty array of bytes. </summary>
         /// <param name="tagName"> Name to assign to this tag. May be <c>null</c>. </param>
-        public NbtByteArray(string? tagName) {
+        public NbtByteArray(string tagName) {
             name = tagName;
             bytes = Array.Empty<byte>();
         }
@@ -54,7 +54,7 @@ namespace DataKombinat.Binary.Tags {
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is <c>null</c>. </exception>
         /// <remarks> Given byte array will be cloned. To avoid unnecessary copying, call one of the other constructor
         /// overloads (that do not take a byte[]) and then set the Value property yourself. </remarks>
-        public NbtByteArray(string? tagName, byte[] value) {
+        public NbtByteArray(string tagName, byte[] value) {
             if (value == null) throw new ArgumentNullException(nameof(value));
             name = tagName;
             bytes = (byte[])value.Clone();

@@ -21,7 +21,7 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an empty NbtByte tag with the given name. </summary>
         /// <param name="tagName"> Name to assign to this tag. May be <c>null</c>. </param>
-        public NbtCompound(string? tagName) {
+        public NbtCompound(string tagName) {
             name = tagName;
         }
 
@@ -39,7 +39,7 @@ namespace DataKombinat.Binary.Tags {
         /// <param name="tags"> Collection of tags to assign to this tag's Value. May not be null </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is <c>null</c>, or one of the tags is <c>null</c>. </exception>
         /// <exception cref="ArgumentException"> If some of the given tags were not named, or two tags with the same name were given. </exception>
-        public NbtCompound(string? tagName, IEnumerable<NbtTag> tags) {
+        public NbtCompound(string tagName, IEnumerable<NbtTag> tags) {
             if (tags == null) throw new ArgumentNullException(nameof(tags));
             name = tagName;
             foreach (NbtTag tag in tags) {
@@ -66,7 +66,7 @@ namespace DataKombinat.Binary.Tags {
         /// <exception cref="ArgumentNullException"> <paramref name="tagName"/> is <c>null</c>; or if trying to assign null value. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tagName"/> does not match the given tag's actual name;
         /// or given tag already has a Parent. </exception>
-        public override NbtTag? this[string tagName] {
+        public override NbtTag this[string tagName] {
             get { return Get<NbtTag>(tagName); }
             set {
                 if (tagName == null) {
@@ -92,7 +92,7 @@ namespace DataKombinat.Binary.Tags {
         /// <returns> The tag with the specified key. Null if tag with the given name was not found. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="tagName"/> is <c>null</c>. </exception>
         /// <exception cref="InvalidCastException"> If tag could not be cast to the desired tag. </exception>
-        public T? Get<T>(string tagName) where T : NbtTag {
+        public T Get<T>(string tagName) where T : NbtTag {
             if (tagName == null) throw new ArgumentNullException(nameof(tagName));
             NbtTag result;
             if (tags.TryGetValue(tagName, out result)) {
@@ -107,7 +107,7 @@ namespace DataKombinat.Binary.Tags {
         /// <returns> The tag with the specified key. Null if tag with the given name was not found. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="tagName"/> is <c>null</c>. </exception>
         /// <exception cref="InvalidCastException"> If tag could not be cast to the desired tag. </exception>
-        public NbtTag? Get(string tagName) {
+        public NbtTag Get(string tagName) {
             if (tagName == null) throw new ArgumentNullException(nameof(tagName));
             NbtTag result;
             if (tags.TryGetValue(tagName, out result)) {
@@ -125,7 +125,7 @@ namespace DataKombinat.Binary.Tags {
         /// <returns> true if the NbtCompound contains a tag with the specified name; otherwise, false. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="tagName"/> is <c>null</c>. </exception>
         /// <exception cref="InvalidCastException"> If tag could not be cast to the desired tag. </exception>
-        public bool TryGet<T>(string tagName, out T? result) where T : NbtTag {
+        public bool TryGet<T>(string tagName, out T result) where T : NbtTag {
             if (tagName == null) throw new ArgumentNullException(nameof(tagName));
             NbtTag tempResult;
             if (tags.TryGetValue(tagName, out tempResult)) {
@@ -144,7 +144,7 @@ namespace DataKombinat.Binary.Tags {
         /// otherwise, null. This parameter is passed uninitialized. </param>
         /// <returns> true if the NbtCompound contains a tag with the specified name; otherwise, false. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="tagName"/> is <c>null</c>. </exception>
-        public bool TryGet(string tagName, out NbtTag? result) {
+        public bool TryGet(string tagName, out NbtTag result) {
             if (tagName == null) throw new ArgumentNullException(nameof(tagName));
             NbtTag tempResult;
             if (tags.TryGetValue(tagName, out tempResult)) {
@@ -204,7 +204,7 @@ namespace DataKombinat.Binary.Tags {
             if (tags.TryGetValue(newName, out _)) {
                 throw new ArgumentException("Cannot rename: a tag with the name already exists in this compound.");
             }
-            if (!tags.TryGetValue(oldName, out NbtTag? tag)) {
+            if (!tags.TryGetValue(oldName, out NbtTag tag)) {
                 throw new ArgumentException("Cannot rename: no tag found to rename.");
             }
             tags.Remove(oldName);

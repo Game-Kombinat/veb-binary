@@ -11,10 +11,10 @@ namespace DataKombinat.Binary {
     public class NbtReader {
         NbtParseState state = NbtParseState.AtStreamBeginning;
         readonly NbtBinaryReader reader;
-        Stack<NbtReaderNode>? nodes;
+        Stack<NbtReaderNode> nodes;
         readonly long streamStartOffset;
         bool atValue;
-        object? valueCache;
+        object valueCache;
         readonly bool canSeekStream;
 
 
@@ -49,13 +49,13 @@ namespace DataKombinat.Binary {
 
 
         /// <summary> Gets the name of the root tag of this NBT stream. </summary>
-        public string? RootName { get; private set; }
+        public string RootName { get; private set; }
 
         /// <summary> Gets the name of the parent tag. May be null (for root tags and descendants of list elements). </summary>
-        public string? ParentName { get; private set; }
+        public string ParentName { get; private set; }
 
         /// <summary> Gets the name of the current tag. May be null (for list elements and end tags). </summary>
-        public string? TagName { get; private set; }
+        public string TagName { get; private set; }
 
         /// <summary> Gets the type of the parent tag. Returns TagType.Unknown if there is no parent tag. </summary>
         public NbtTagType ParentTagType { get; private set; }
@@ -418,7 +418,7 @@ namespace DataKombinat.Binary {
         /// <returns> <c>true</c> if a matching tag is found; otherwise <c>false</c>. </returns>
         /// <exception cref="NbtFormatException"> If an error occurred while parsing data in NBT format. </exception>
         /// <exception cref="InvalidOperationException"> If NbtReader cannot recover from a previous parsing error. </exception>
-        public bool ReadToFollowing(string? tagName) {
+        public bool ReadToFollowing(string tagName) {
             while (ReadToFollowing()) {
                 if (TagName == tagName) {
                     return true;
@@ -434,7 +434,7 @@ namespace DataKombinat.Binary {
         /// <returns> <c>true</c> if a matching descendant tag is found; otherwise <c>false</c>. </returns>
         /// <exception cref="NbtFormatException"> If an error occurred while parsing data in NBT format. </exception>
         /// <exception cref="InvalidReaderStateException"> If NbtReader cannot recover from a previous parsing error. </exception>
-        public bool ReadToDescendant(string? tagName) {
+        public bool ReadToDescendant(string tagName) {
             if (state == NbtParseState.Error) {
                 throw new InvalidReaderStateException(ErroneousStateError);
             } else if (state == NbtParseState.AtStreamEnd) {
@@ -481,7 +481,7 @@ namespace DataKombinat.Binary {
         /// <returns> <c>true</c> if a matching sibling element is found; otherwise <c>false</c>. </returns>
         /// <exception cref="NbtFormatException"> If an error occurred while parsing data in NBT format. </exception>
         /// <exception cref="InvalidOperationException"> If NbtReader cannot recover from a previous parsing error. </exception>
-        public bool ReadToNextSibling(string? tagName) {
+        public bool ReadToNextSibling(string tagName) {
             while (ReadToNextSibling()) {
                 if (TagName == tagName) {
                     return true;

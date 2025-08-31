@@ -17,7 +17,7 @@ namespace DataKombinat.Binary {
 
         /// <summary> Gets the file name used for most recent loading/saving of this file.
         /// May be <c>null</c>, if this <c>NbtFile</c> instance has not been loaded from, or saved to, a file. </summary>
-        public string? FileName { get; private set; }
+        public string FileName { get; private set; }
 
         /// <summary> Gets the compression method used for most recent loading/saving of this file.
         /// Defaults to AutoDetect. </summary>
@@ -65,7 +65,7 @@ namespace DataKombinat.Binary {
             }
         }
 
-        NbtTagCollection? rootTag; // lazily-initialized by the getter
+        NbtTagCollection rootTag; // lazily-initialized by the getter
 
         /// <summary> Whether this file should read/write tags in big-endian encoding format. </summary>
         public bool BigEndian => Flavor.BigEndian;
@@ -200,7 +200,7 @@ namespace DataKombinat.Binary {
         /// <exception cref="InvalidDataException"> If file compression could not be detected, or decompressing failed. </exception>
         /// <exception cref="NbtFormatException"> If an error occurred while parsing data in NBT format. </exception>
         /// <exception cref="IOException"> If an I/O error occurred while reading the file. </exception>
-        public long LoadFromFile(string fileName, NbtCompression compression, TagSelector? selector) {
+        public long LoadFromFile(string fileName, NbtCompression compression, TagSelector selector) {
             if (fileName == null) throw new ArgumentNullException(nameof(fileName));
 
             using (
@@ -234,7 +234,7 @@ namespace DataKombinat.Binary {
         /// <exception cref="InvalidDataException"> If file compression could not be detected or decompressing failed. </exception>
         /// <exception cref="NbtFormatException"> If an error occurred while parsing data in NBT format. </exception>
         public long LoadFromBuffer(byte[] buffer, int index, int length, NbtCompression compression,
-                                   TagSelector? selector) {
+                                   TagSelector selector) {
             using (var ms = new MemoryStream(buffer, index, length)) {
                 LoadFromStream(ms, compression, selector);
                 FileName = null;
@@ -278,7 +278,7 @@ namespace DataKombinat.Binary {
         /// <exception cref="EndOfStreamException"> If file ended earlier than expected. </exception>
         /// <exception cref="InvalidDataException"> If file compression could not be detected, decompressing failed, or given stream does not support reading. </exception>
         /// <exception cref="NbtFormatException"> If an error occurred while parsing data in NBT format. </exception>
-        public long LoadFromStream(Stream stream, NbtCompression compression, TagSelector? selector) {
+        public long LoadFromStream(Stream stream, NbtCompression compression, TagSelector selector) {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
 
             FileName = null;
@@ -388,7 +388,7 @@ namespace DataKombinat.Binary {
         }
 
 
-        void LoadFromStreamInternal(Stream stream, TagSelector? tagSelector) {
+        void LoadFromStreamInternal(Stream stream, TagSelector tagSelector) {
             // Make sure the first byte in this file is the tag for a TAG_Compound
             int firstByte = stream.ReadByte();
             if (firstByte < 0) {

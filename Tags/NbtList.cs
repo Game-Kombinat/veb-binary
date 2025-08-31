@@ -52,7 +52,7 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an NbtList with given name, empty contents, and undefined ListType. </summary>
         /// <param name="tagName"> Name to assign to this tag. May be <c>null</c>. </param>
-        public NbtList(string? tagName)
+        public NbtList(string tagName)
             : this(tagName, null, NbtTagType.Unknown) { }
 
 
@@ -85,7 +85,7 @@ namespace DataKombinat.Binary.Tags {
         /// ListType is inferred from the first tag. List may be empty, but may not be <c>null</c>. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is <c>null</c>. </exception>
         /// <exception cref="ArgumentException"> If given tags are of mixed types. </exception>
-        public NbtList(string? tagName, IEnumerable<NbtTag> tags)
+        public NbtList(string tagName, IEnumerable<NbtTag> tags)
             : this(tagName, tags, NbtTagType.Unknown) {
             // the base constructor will allow null "tags," but we don't want that in this constructor
             if (tags == null) throw new ArgumentNullException(nameof(tags));
@@ -112,7 +112,7 @@ namespace DataKombinat.Binary.Tags {
         /// <param name="givenListType"> Name to assign to this tag.
         /// If givenListType is Unknown, ListType will be inferred from the first tag added to this NbtList. </param>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="givenListType"/> is not a valid tag type. </exception>
-        public NbtList(string? tagName, NbtTagType givenListType)
+        public NbtList(string tagName, NbtTagType givenListType)
             : this(tagName, null, givenListType) { }
 
 
@@ -123,7 +123,7 @@ namespace DataKombinat.Binary.Tags {
         /// <param name="givenListType"> Name to assign to this tag. May be Unknown (to infer type from the first element of tags). </param>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="givenListType"/> is not a valid tag type. </exception>
         /// <exception cref="ArgumentException"> If given tags do not match <paramref name="givenListType"/>, or are of mixed types. </exception>
-        public NbtList(string? tagName, IEnumerable<NbtTag>? tags, NbtTagType givenListType) {
+        public NbtList(string tagName, IEnumerable<NbtTag> tags, NbtTagType givenListType) {
             name = tagName;
             ListType = givenListType;
 
@@ -349,7 +349,7 @@ namespace DataKombinat.Binary.Tags {
         /// <summary> Determines the index of a specific tag in this NbtList </summary>
         /// <returns> The index of tag if found in the list; otherwise, -1. </returns>
         /// <param name="tag"> The tag to locate in this NbtList. </param>
-        public int IndexOf(NbtTag? tag) {
+        public int IndexOf(NbtTag tag) {
             if (tag == null) return -1;
             return tags.IndexOf(tag);
         }

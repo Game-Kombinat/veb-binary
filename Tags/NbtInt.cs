@@ -26,14 +26,14 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an NbtInt tag with the given name and the default value of 0. </summary>
         /// <param name="tagName"> Name to assign to this tag. May be <c>null</c>. </param>
-        public NbtInt(string? tagName)
+        public NbtInt(string tagName)
             : this(tagName, 0) { }
 
 
         /// <summary> Creates an NbtInt tag with the given name and value. </summary>
         /// <param name="tagName"> Name to assign to this tag. May be <c>null</c>. </param>
         /// <param name="value"> Value to assign to this tag. </param>
-        public NbtInt(string? tagName, int value) {
+        public NbtInt(string tagName, int value) {
             name = tagName;
             Value = value;
         }

@@ -7,7 +7,7 @@ namespace DataKombinat.Binary.Tags {
     public abstract class NbtTag : ICloneable {
         /// <summary> Parent compound tag, either NbtList or NbtCompound, if any.
         /// May be <c>null</c> for detached tags. </summary>
-        public NbtTag? Parent { get; internal set; }
+        public NbtTag Parent { get; internal set; }
 
         /// <summary> Type of this tag. </summary>
         public abstract NbtTagType TagType { get; }
@@ -32,7 +32,7 @@ namespace DataKombinat.Binary.Tags {
         /// <exception cref="ArgumentNullException"> If <paramref name="value"/> is <c>null</c>, and <c>Parent</c> tag is an NbtCompound.
         /// Name of tags inside an <c>NbtCompound</c> may not be null. </exception>
         /// <exception cref="ArgumentException"> If this tag resides in an <c>NbtCompound</c>, and a sibling tag with the name already exists. </exception>
-        public string? Name {
+        public string Name {
             get { return name; }
             set {
                 if (name == value) {
@@ -53,7 +53,7 @@ namespace DataKombinat.Binary.Tags {
         }
 
         // Used by impls to bypass setter checks (and avoid side effects) when initializing state
-        internal string? name;
+        internal string name;
 
         /// <summary> Gets the full name of this tag, including all parent tag names, separated by dots. 
         /// Unnamed tags show up as empty strings. </summary>
@@ -88,7 +88,7 @@ namespace DataKombinat.Binary.Tags {
         /// <exception cref="InvalidOperationException"> If used on a tag that is not NbtCompound. </exception>
         /// <remarks> ONLY APPLICABLE TO NbtCompound OBJECTS!
         /// Included in NbtTag base class for programmers' convenience, to avoid extra type casts. </remarks>
-        public virtual NbtTag? this[string tagName] {
+        public virtual NbtTag this[string tagName] {
             get { throw new InvalidOperationException("String indexers only work on NbtCompound tags."); }
             set { throw new InvalidOperationException("String indexers only work on NbtCompound tags."); }
         }
@@ -309,7 +309,7 @@ namespace DataKombinat.Binary.Tags {
         /// <param name="type"> NbtTagType to name. </param>
         /// <returns> String representing the canonical name of a tag,
         /// or null of given TagType does not have a canonical name (e.g. Unknown). </returns>
-        public static string? GetCanonicalTagName(NbtTagType type) {
+        public static string GetCanonicalTagName(NbtTagType type) {
             return type switch {
                 NbtTagType.Byte => "TAG_Byte",
                 NbtTagType.ByteArray => "TAG_Byte_Array",

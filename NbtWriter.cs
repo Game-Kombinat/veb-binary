@@ -16,7 +16,7 @@ namespace DataKombinat.Binary {
         NbtTagType parentType;
         int listIndex;
         int listSize;
-        Stack<NbtWriterNode>? nodes;
+        Stack<NbtWriterNode> nodes;
 
 
         /// <summary> Initializes a new instance of the NbtWriter class. </summary>
@@ -708,7 +708,7 @@ namespace DataKombinat.Binary {
         }
 
 
-        void EnforceConstraints(string? name, NbtTagType desiredType) {
+        void EnforceConstraints(string name, NbtTagType desiredType) {
             if (IsDone) {
                 throw new NbtFormatException("Cannot write any more tags: root tag has been closed.");
             }

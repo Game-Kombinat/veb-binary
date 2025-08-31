@@ -9,7 +9,7 @@ namespace DataKombinat.Binary {
     public class NbtBinaryReader : BinaryReader {
         readonly byte[] buffer = new byte[sizeof(double)];
 
-        byte[]? seekBuffer;
+        byte[] seekBuffer;
         const int SeekBufferSize = 8 * 1024;
         readonly bool swapNeeded;
         readonly byte[] stringConversionBuffer = new byte[64];
@@ -175,6 +175,6 @@ namespace DataKombinat.Binary {
         }
 
 
-        public TagSelector? Selector { get; set; }
+        public TagSelector Selector { get; set; }
     }
 }

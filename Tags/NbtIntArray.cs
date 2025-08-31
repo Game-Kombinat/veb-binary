@@ -27,7 +27,7 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an unnamed NbtIntArray tag, containing an empty array of ints. </summary>
         public NbtIntArray()
-            : this((string?)null) { }
+            : this((string)null) { }
 
 
         /// <summary> Creates an unnamed NbtIntArray tag, containing the given array of ints. </summary>
@@ -41,7 +41,7 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an NbtIntArray tag with the given name, containing an empty array of ints. </summary>
         /// <param name="tagName"> Name to assign to this tag. May be <c>null</c>. </param>
-        public NbtIntArray(string? tagName) {
+        public NbtIntArray(string tagName) {
             name = tagName;
             ints = Array.Empty<int>();
         }
@@ -53,7 +53,7 @@ namespace DataKombinat.Binary.Tags {
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is <c>null</c>. </exception>
         /// <remarks> Given int array will be cloned. To avoid unnecessary copying, call one of the other constructor
         /// overloads (that do not take a int[]) and then set the Value property yourself. </remarks>
-        public NbtIntArray(string? tagName, int[] value) {
+        public NbtIntArray(string tagName, int[] value) {
             if (value == null) throw new ArgumentNullException(nameof(value));
             name = tagName;
             ints = (int[])value.Clone();

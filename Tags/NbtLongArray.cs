@@ -29,7 +29,7 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an unnamed NbtLongArray tag, containing an empty array of longs. </summary>
         public NbtLongArray()
-            : this((string?)null) { }
+            : this((string)null) { }
 
         /// <summary> Creates an unnamed NbtLongArray tag, containing the given array of longs. </summary>
         /// <param name="value"> Long array to assign to this tag's Value. May not be <c>null</c>. </param>
@@ -41,7 +41,7 @@ namespace DataKombinat.Binary.Tags {
 
         /// <summary> Creates an NbtLongArray tag with the given name, containing an empty array of longs. </summary>
         /// <param name="tagName"> Name to assign to this tag. May be <c>null</c>. </param>
-        public NbtLongArray(string? tagName) {
+        public NbtLongArray(string tagName) {
             name = tagName;
             longs = Array.Empty<long>();
         }
@@ -52,7 +52,7 @@ namespace DataKombinat.Binary.Tags {
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is <c>null</c>. </exception>
         /// <remarks> Given long array will be cloned. To avoid unnecessary copying, call one of the other constructor
         /// overloads (that do not take a long[]) and then set the Value property yourself. </remarks>
-        public NbtLongArray(string? tagName, long[] value) {
+        public NbtLongArray(string tagName, long[] value) {
             if (value == null) throw new ArgumentNullException(nameof(value));
             name = tagName;
             longs = (long[])value.Clone();
